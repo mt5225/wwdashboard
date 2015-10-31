@@ -1,0 +1,69 @@
+{
+  "name": "Management",
+  "description": "Management console for perfect life",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Qing Jiang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mt5225/mngtconsole"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.4.x"
+  },
+  "scripts": {
+    "start": "coffee server.coffee",
+    "gulp": "gulp dev --require coffee-script/register",
+    "gulp-build": "gulp build --require coffee-script/register",
+    "test": "mocha --compilers coffee:coffee-script/register --reporter nyan",
+    "postinstall": "bower install --allow-root"
+  },
+  "dependencies": {
+    "body-parser": "1.0.x",
+    "coffee-script": "1.7.x",
+    "compression": "1.0.x",
+    "connect-mongo": "0.4.x",
+    "connect-multiparty": "1.0.x",
+    "cookie-parser": "1.0.x",
+    "errorhandler": "1.0.x",
+    "express": "4.0.x",
+    "express-session": "1.0.x",
+    "forever": "0.11.x",
+    "gulp": "^3.9.0",
+    "helmet": "0.2.x",
+    "lodash": "^3.10.0",
+    "method-override": "1.0.x",
+    "mongoose": "3.8.x",
+    "nodetime": "0.8.x",
+    "passport": "0.2.x",
+    "passport-http": "0.2.x",
+    "password-hash": "1.2.x",
+    "q": "^1.4.1",
+    "serve-favicon": "2.0.x",
+    "serve-static": "1.0.x",
+    "winston": "0.7.x"
+  },
+  "devDependencies": {
+    "bower": "1.3.x",
+    "chai": "1.9.x",
+    "gulp-coffee": "1.4.x",
+    "gulp-concat": "2.2.x",
+    "gulp-flatten": "0.0.x",
+    "gulp-imagemin": "0.3.x",
+    "gulp-minify-css": "0.3.x",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-scp2": "^0.1.3",
+    "gulp-sftp": "^0.1.4",
+    "gulp-shell": "^0.4.2",
+    "gulp-size": "0.3.x",
+    "gulp-ssh": "^0.4.0",
+    "gulp-uglify": "0.2.x",
+    "gulp-util": "2.2.x",
+    "gulp-watch": "0.6.x",
+    "mocha": "1.18.x",
+    "rimraf": "^2.4.0",
+    "run-sequence": "^1.1.1",
+    "supertest": "0.11.x"
+  }
+}
