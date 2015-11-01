@@ -1,12 +1,17 @@
 logger = require '../config/logger'
 
 mongoose = require 'mongoose'
+redis = require("redis"),
+client = redis.createClient();
 User = mongoose.model 'User'
 
 module.exports =
 
   getUsers: (cb) ->
-    User.find {}, (err, user) -> cb err, user
+    #User.find {}, (err, user) -> cb err, user
+    
+      
+
 
   getUser: (id, cb) ->
     User.findOne {_id: id}, (err, user) -> cb err, user

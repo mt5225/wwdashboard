@@ -1,15 +1,15 @@
 base =
   ENV: process.env.NODE_ENV || 'development'
   PORT: process.env.PORT || 3000
-  LOGPATH: "mean.coffee.log"
+  LOGPATH: "uinnova.coffee.log"
   COOKIE_SECRET: "thisisthesecretforthesession"
-  DBURLTEST: "mongodb://localhost/meandb_test"
+  DBURLTEST: "mongodb://localhost/uDCB"
 
 dev =
-  DBURL: "mongodb://localhost/meandb"
+  DBURL: "mongodb://localhost/uDCB"
 
 prod =
-  DBURL: "mongodb://localhost/meandb"
+  DBURL: "mongodb://localhost/uDCB"
 
 mergeConfig = (config) ->
   for key, val of config

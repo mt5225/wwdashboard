@@ -5,6 +5,9 @@ meanApp.config ['$routeProvider',
           .when '/users',
             templateUrl: 'views/users.html'
             controller: 'UserController'
+          .when '/users/:id',
+            templateUrl: 'views/userdetails.html'
+            controller: 'UserController'
           .when '/',
             templateUrl: 'views/main.html'
             controller: 'MainController'
@@ -15,10 +18,3 @@ meanApp.config ['$routeProvider',
           .otherwise
             redirectTo: '/404'
 ]
-
-#Setting HTML5 Location Mode
-#meanApp.config ['$locationProvider',
-
-  #($locationProvider) -> $locationProvider.html5Mode(true)
-
-#]

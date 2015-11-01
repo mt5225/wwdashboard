@@ -20,6 +20,7 @@
     "postinstall": "bower install --allow-root"
   },
   "dependencies": {
+    "bluebird": "^3.0.3",
     "body-parser": "1.0.x",
     "coffee-script": "1.7.x",
     "compression": "1.0.x",
@@ -34,12 +35,16 @@
     "helmet": "0.2.x",
     "lodash": "^3.10.0",
     "method-override": "1.0.x",
+    "mongodb": "^2.0.47",
+    "mongojs": "^1.4.1",
     "mongoose": "3.8.x",
     "nodetime": "0.8.x",
     "passport": "0.2.x",
     "passport-http": "0.2.x",
     "password-hash": "1.2.x",
     "q": "^1.4.1",
+    "redis": "^2.3.0",
+    "request": "^2.65.0",
     "serve-favicon": "2.0.x",
     "serve-static": "1.0.x",
     "winston": "0.7.x"

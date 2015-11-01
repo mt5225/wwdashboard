@@ -6,12 +6,12 @@ user_service = require '../services/service.user'
 
 module.exports = (app) ->
 
-  app.get '/users', auth.basic, (req, res) ->
+  app.get '/api/users', auth.none, (req, res) ->
     logger.info 'get all users'
     user_service.getUsers (err, users) ->
       res.send err, users
 
-  app.get '/users/:id', auth.basic, (req, res) ->
+  app.get '/api/users/:id', auth.none, (req, res) ->
     id = req.params.id
     logger.info 'get user #{id}'
     user_service.getUser id, (err, user) ->
