@@ -1,7 +1,38 @@
-<section>
-
-    <div class="starter-template">
-        <h1>Users List</h1>
+<div ng-controller="UserController" ng-init="find()">
+    <br>
+    <div class="row">
+        <div class="input-field col s12">
+          <button class="btn waves-effect waves-light" ng-click="changeSort('number of scenes')" name="action">By Drawings</button> &nbsp; 
+          <button class="btn waves-effect waves-light" ng-click="changeSort('lastonline')" name="action">Last Online</button> &nbsp; 
+          <button class="btn waves-effect waves-light red" ng-click="changeSort('uid')" name="action">Reset</button>
+          &nbsp;  
+        </div>
+        <div class="input-field col s6">
+            <input ng-model="searchText" id="user_search" type="text" class="validate">
+            <label for="user_search">Search</label>
+        </div>
+        <p class="flow-text col s4 offset-s2"> Total : <b>{{totalUser}}</b>  &nbsp; </p>
+        <br/>
+        
     </div>
-<div ng-controller="UserController" ng-init="find()"></div>
-</section>
+    <div class="row">
+        <div class="col s4" ng-repeat="user in users | filter:searchText | orderBy:sort:true">
+            <div class="card grey lighten-2">
+                <div class="card-content black-text">
+                    <span class="card-title black-text"> 
+                        <ul class="collection">
+                             <li class="collection-item avatar"> <img ng-src="{{user.picture}}" class="circle">{{user.username}}</li> 
+                        </ul>
+                    </span>                   
+                    <p>Join Date: {{user.joindate}}</p>
+                    <p>Last Online: {{user.lastonline}}</p>
+                    <p>Number of Drawings: &nbsp; <font size="10"><b>{{user.scenes}}</b></font></p>
+                    <a href="mailto:{{user.email}}"> {{user.email}} </a>
+                </div>
+                <div class="card-action black-text">
+                    <a data-ng-href="#/users/{{user.uid}}" class="secondary-content black-text"> View <i class="mdi-editor-mode-edit"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

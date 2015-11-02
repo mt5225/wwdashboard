@@ -15,7 +15,7 @@ scenes = []
 #drop users collection
 dropUsersCollection = (db)->
   deferred = Q.defer()
-  db.collection('users').drop (err, result) ->
+  db.collection('usmusers').drop (err, result) ->
     console.log "1. drop users collection"
     deferred.resolve()
     return
@@ -41,19 +41,17 @@ queryUserData = (db)->
       deferred2 = Q.defer()
       Q.ninvoke(client, "HSCAN", "user:#{id}",  0, "COUNT", 10000).done (replies) ->
         userinfo = {}
-        userinfo.picture = replies[1][3]
-        userinfo.username = replies[1][9]
-        userinfo.uid = replies[1][11]
-        userinfo.joindate = replies[1][23]
-        userinfo.lastonline = replies[1][27]
-        userinfo.userslug = replies[1][35]
-        userinfo.email = replies[1][37]  
+        #make key and value
+        replies = replies[1]
+        len = replies.length / 2
+        for i in [0...len]
+          userinfo[replies[i*2]] = replies[i*2 + 1]
         userinfo.scenes = 0
         for it in scenes
           if it['_id'] is userinfo.uid
             userinfo.scenes = it['count']
             break
-        db.collection('users').insertOne userinfo, (err, result) ->
+        db.collection('usmusers').insertOne userinfo, (err, result) ->
           deferred2.resolve()
       deferred2.promise
     Q.allSettled(promises)

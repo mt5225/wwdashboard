@@ -6,7 +6,7 @@ meanApp.config ['$routeProvider',
             templateUrl: 'views/users.html'
             controller: 'UserController'
           .when '/users/:id',
-            templateUrl: 'views/userdetails.html'
+            templateUrl: 'views/scenes.html'
             controller: 'UserController'
           .when '/',
             templateUrl: 'views/main.html'
