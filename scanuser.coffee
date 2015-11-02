@@ -37,15 +37,17 @@ queryUserData = (db)->
   deferred = Q.defer()
   Q.ninvoke(client, "ZRANGE", 'userslug:uid',0, 9999).done (users) ->
     console.log "3. create user info"
-    promises = _.map [1...users.length], (id) ->
+    promises = _.map [0...users.length], (id) ->
       deferred2 = Q.defer()
-      Q.ninvoke(client, "HSCAN", "user:#{id}",  0, "COUNT", 10000).done (replies) ->
+      Q.ninvoke(client, "HSCAN", "user:#{id + 1}",  0, "COUNT", 10000).done (replies) ->
         userinfo = {}
         #make key and value
         replies = replies[1]
         len = replies.length / 2
         for i in [0...len]
           userinfo[replies[i*2]] = replies[i*2 + 1]
+          if userinfo["uid"] is "1"
+            userinfo["picture"] = "https://s3-us-west-1.amazonaws.com/uinnova/admin.png"
         userinfo.scenes = 0
         for it in scenes
           if it['_id'] is userinfo.uid
