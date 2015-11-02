@@ -1,6 +1,6 @@
 base =
   ENV: process.env.NODE_ENV || 'development'
-  PORT: process.env.PORT || 3000
+  PORT: process.env.PORT || 8081
   LOGPATH: "uinnova.coffee.log"
   COOKIE_SECRET: "thisisthesecretforthesession"
   DBURLTEST: "mongodb://localhost/uDCB"
