@@ -1,13 +1,14 @@
 Q = require 'q'
 _ = require 'lodash'
 redis = require 'redis'
+logger = require './config/logger'
 MongoClient = require('mongodb').MongoClient 
 url = 'mongodb://localhost:27017/uDCB'
 
 client = redis.createClient()
 
 client.on 'error', (err) ->
-  console.log 'Error ' + err
+  logger.info 'Error ' + err
   return
 
 scenes = []
@@ -16,7 +17,7 @@ scenes = []
 dropUsersCollection = (db)->
   deferred = Q.defer()
   db.collection('usmusers').drop (err, result) ->
-    console.log "1. drop users collection"
+    logger.info "1. drop users collection"
     deferred.resolve()
     return
   deferred.promise
@@ -25,9 +26,9 @@ dropUsersCollection = (db)->
 calcScenes = (db)->
   deferred = Q.defer()
   db.collection('usms').aggregate([ { $group: '_id': '$userid', 'count': $sum: 1 } ]).toArray (err, result) ->
-    console.log "2. aggregate scene record"
+    logger.info "2. aggregate scene record"
     scenes = result
-    #console.log scenes
+    #logger.info scenes
     deferred.resolve()
     return
   deferred.promise
@@ -36,7 +37,7 @@ calcScenes = (db)->
 queryUserData = (db)->
   deferred = Q.defer()
   Q.ninvoke(client, "ZRANGE", 'userslug:uid',0, 9999).done (users) ->
-    console.log "3. create user info"
+    logger.info "3. create user info"
     promises = _.map [0...users.length], (id) ->
       deferred2 = Q.defer()
       Q.ninvoke(client, "HSCAN", "user:#{id + 1}",  0, "COUNT", 10000).done (replies) ->
@@ -70,7 +71,7 @@ closeConnection = (db) ->
 MongoClient.connect url, (err, db) ->
   Q.all [dropUsersCollection(db), calcScenes(db), queryUserData(db)]
   .done ->
-    console.log "we done, clean up"
+    logger.info "we done, clean up"
     db.close()
     client.quit()
     process.exit()
