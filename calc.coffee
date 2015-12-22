@@ -8,7 +8,7 @@ url = 'mongodb://localhost:27017/uDCB'
 Date::getWeekNumber = ->
   d = new Date(+this)
   d.setHours 0, 0, 0
-  d.setDate d.getDate() + 6 - (d.getDay() or 7)
+  d.setDate d.getDate() + 4 - (d.getDay() or 7)
   Math.ceil ((d - (new Date(d.getFullYear(), 0, 1))) / 8.64e7 + 1) / 7
 
 Date::yyyymmdd = ->
@@ -19,7 +19,7 @@ Date::yyyymmdd = ->
   yyyy + "-" + (if mm[1] then mm else '0' + mm[0]) + "-" +(if dd[1] then dd else '0' + dd[0])
 
 getDateOfWeek = (w, y) ->
-  d = 1 + (w - 1) * 7
+  d = 3 + (w - 1) * 7
   new Date(y, 0, d)
 
 writeToFile = (filename, strArray) ->
